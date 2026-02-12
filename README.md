@@ -66,7 +66,7 @@ END START
 #### Output Table
 
 | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
-
+| ----------------------- | ------------------------ |
 |      2000:08            |        2004:06           |
 
 |      2001:00            |        2005:00           |
