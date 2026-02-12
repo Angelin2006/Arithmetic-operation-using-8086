@@ -35,37 +35,57 @@ To write and execute Assembly Language Programs to perform arithmetic operations
 
 ```asm
 CODE SEGMENT
-ASSUME CS: CODE, DS: CODE
+ASSUME CS:CODE, DS:CODE
+
 ORG 1000H
-MOV SI,2000H
-MOV CL,00H
-MOV AX,[SI]
-MOV BX,[SI+02H]
-ADD AX,BX
-JNC L1
-INC CL
-L1:
-MOV [SI+04H],AX
-MOV [SI+06H],CL
-MOV AH,4CH
-INT 21H
+
+START:
+    MOV AX, CODE
+    MOV DS, AX
+
+    MOV SI,2000H
+    MOV DX,0000H
+
+    MOV AX,[SI]
+    MOV BX,[SI+02H]
+
+    ADD AX,BX
+
+    MOV [SI+04H],AX
+    MOV [SI+06H],DX
+
+    MOV AH,4CH
+    INT 21H
+
 CODE ENDS
-END
+END START
+
+
 ```
 
 #### Output Table
 
 | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
 | ----------------------- | ------------------------ |
-|                         |                          |
+|      2000:08            |        2004:06           |
+| ----------------------- | ------------------------ |
+|      2001:00            |        2005:00           |
+| ----------------------- | ------------------------ |
+|      2002:04            |        2006:00           |
+| ----------------------- | ------------------------ |
+|      2003:00            |        2007:00           |
+| ----------------------- | ------------------------ |
 
 #### Manual Calculations
 
-(Add your calculation here)
+<img width="810" height="421" alt="Screenshot 2026-02-12 113251" src="https://github.com/user-attachments/assets/cf56d7da-00e1-4381-b9ab-aa64ff149c33" />
+
 
 ---
 
 ## OUTPUT IMAGE FROM MASM SOFTWARE
+
+<img width="630" height="431" alt="Screenshot 2026-01-30 110848" src="https://github.com/user-attachments/assets/3bbb5c8d-a923-4ca2-85ee-af2045ef4dd1" />
 
 ## 2. SUBTRACTION
 
@@ -84,22 +104,59 @@ END
 
 #### Program
 
+```asm
 
+    CODE SEGMENT
+    ASSUME CS:CODE, DS:CODE
+
+    ORG 1000H
+
+    START:
+    MOV AX, CODE
+    MOV DS, AX
+
+    MOV SI,2000H
+    MOV DX,0000H
+
+    MOV AX,[SI]
+    MOV BX,[SI+02H]
+
+    SUB AX,BX
+
+    MOV [SI+04H],AX
+    MOV [SI+06H],DX
+
+    MOV AH,4CH
+    INT 21H
+
+    CODE ENDS
+    END START
+
+```
 
 #### Output Table
 
 | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
 | ----------------------- | ------------------------ |
-|                         |                          |
+|      2000:08            |        2004:04           |
+| ----------------------- | ------------------------ |
+|      2001:00            |        2005:00           |
+| ----------------------- | ------------------------ |
+|      2002:04            |        2006:00           |
+| ----------------------- | ------------------------ |
+|      2003:00            |        2007:00           |
+| ----------------------- | ------------------------ |
 
 #### Manual Calculations
 
 (Add your calculation here)
 
----
+<img width="1280" height="985" alt="image" src="https://github.com/user-attachments/assets/60192119-c88f-4d29-920a-a1b679512d19" />
 
 
 ## OUTPUT SCREEN FROM MASM SOFTWARE
+
+<img width="630" height="421" alt="Screenshot 2026-01-23 104654" src="https://github.com/user-attachments/assets/7ef200fe-4aa0-448b-91e8-a6f3c10d5e4c" />
 
 ## 3. MULTIPLICATION
 
@@ -120,34 +177,55 @@ END
 
 ```asm
 CODE SEGMENT
-ASSUME CS: CODE, DS: CODE
+ASSUME CS:CODE, DS:CODE
+
 ORG 1000H
-MOV SI,2000H
-MOV DX,0000H
-MOV AX,[SI]
-MOV BX,[SI+02H]
-MUL BX
-MOV [SI+04H],AX
-MOV [SI+06H],DX
-MOV AH,4CH
-INT 21H
+
+START:
+    MOV AX, CODE
+    MOV DS, AX
+
+    MOV SI,2000H
+    MOV DX,0000H
+
+    MOV AX,[SI]
+    MOV BX,[SI+02H]
+
+    MUL BX
+
+    MOV [SI+04H],AX
+    MOV [SI+06H],DX
+
+    MOV AH,4CH
+    INT 21H
+
 CODE ENDS
-END
+END START
+
+
 ```
 
 #### Output Table
 
 | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
 | ----------------------- | ------------------------ |
-|                         |                          |
+|      2000:0A            |        2004:14           |
+| ----------------------- | ------------------------ |
+|      2001:00            |        2005:00           |
+| ----------------------- | ------------------------ |
+|      2002:05            |        2006:00           |
+| ----------------------- | ------------------------ |
+|      2003:00            |        2007:00           |
+| ----------------------- | ------------------------ |
 
 #### Manual Calculations
 
-(Add your calculation here)
+<img width="1280" height="1082" alt="image" src="https://github.com/user-attachments/assets/64c50523-45d9-4445-8abd-dee07b2f3f31" />
 
----
 
 ## OUTPUT SCREEN FROM MASM SOFTWARE
+
+<img width="654" height="418" alt="Screenshot 2026-01-30 112451" src="https://github.com/user-attachments/assets/13df456f-ae6a-46be-85c2-1c0ec90e9546" />
 
 ## 4. DIVISION
 
@@ -165,35 +243,55 @@ END
 
 ```asm
 CODE SEGMENT
-ASSUME CS: CODE, DS: CODE
+ASSUME CS:CODE, DS:CODE
+
 ORG 1000H
-MOV SI,2000H
-MOV DX,0000H
-MOV AX,[SI]
-MOV BX,[SI+02H]
-DIV BX
-MOV [SI+04H],AX
-MOV [SI+06H],DX
-MOV AH,4CH
-INT 21H
+
+START:
+    MOV AX, CODE
+    MOV DS, AX
+
+    MOV SI,2000H
+    MOV DX,0000H        ; IMPORTANT: clear DX before DIV
+
+    MOV AX,[SI]         ; Dividend (16-bit)
+    MOV BX,[SI+02H]     ; Divisor (16-bit)
+
+    DIV BX              ; DX:AX / BX
+                        ; Quotient -> AX
+                        ; Remainder -> DX
+
+    MOV [SI+04H],AX     ; Store quotient
+    MOV [SI+06H],DX     ; Store remainder
+
+    INT 3               ; <-- stop here for DEBUG
+
 CODE ENDS
-END
+END START
+
 ```
 
 #### Output Table
 
 | MEMORY LOCATION (INPUT) | MEMORY LOCATION (OUTPUT) |
 | ----------------------- | ------------------------ |
-|                         |                          |
+|      2000:0A            |        2004:02           |
+| ----------------------- | ------------------------ |
+|      2001:00            |        2005:00           |
+| ----------------------- | ------------------------ |
+|      2002:05            |        2006:00           |
+| ----------------------- | ------------------------ |
+|      2003:00            |        2007:00           |
+| ----------------------- | ------------------------ |
 
 #### Manual Calculations
 
-(Add your calculation here)
+<img width="1280" height="381" alt="image" src="https://github.com/user-attachments/assets/946ee29d-8ef6-4d91-ae5e-5661cc239861" />
 
 ---
 ## OUTPUT FROM MASM SOFTWARE
 
-
+<img width="610" height="411" alt="Screenshot 2026-01-30 113045" src="https://github.com/user-attachments/assets/e4c41987-0c6f-4407-bb6c-23af2a43d7b3" />
 
 ## RESULT
 
